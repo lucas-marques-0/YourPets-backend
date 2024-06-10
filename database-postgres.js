@@ -5,7 +5,7 @@ export class DatabasePostgres {
     async criarUsuario(usuario) {
         const usuarioId = randomUUID()
         const { username, email, password, pets } = usuario
-        await sql `insert into usuarios (id, username, email, password, avatar, musicas, pets) VALUES (${usuarioId}, ${username}, ${email}, ${password}, ${pets})`
+        await sql `insert into usuarios (id, username, email, password, pets) VALUES (${usuarioId}, ${username}, ${email}, ${password}, ${pets})`
     }
 
     async buscarUsuarios() {
