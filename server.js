@@ -68,8 +68,8 @@ app.post('/usuarios/:id', authenticateToken, async (req, res) => {
 });
 
 app.put('/usuarios/:id', authenticateToken, async (req, res) => {
-  const { userID, musicasUsuario } = req.body;
-  await database.atualizarMusicasUsuario(userID, musicasUsuario);
+  const { userID, pets } = req.body;
+  await database.updateUserPets(userID, pets);
   return res.status(201).send();
 });
 

@@ -18,7 +18,7 @@ export class DatabasePostgres {
         return infosUsuarios
     }
 
-    async atualizarMusicasUsuario(id, musicasAtualizadas) {
-        await sql `UPDATE usuarios SET musicas = ${musicasAtualizadas} WHERE id = ${id}`
+    async updateUserPets(id, pets) {
+        await sql `UPDATE usuarios SET pets = ${pets} WHERE id = ${id}`
     }
 }
