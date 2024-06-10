@@ -26,13 +26,12 @@ const authenticateToken = (req, res, next) => {
 app.post('/usuarios', async (req, res) => {
   const { action } = req.body;
   if (action === 'cadastro') {
-    const { username, email, password, avatar, musicas } = req.body;
+    const { username, email, password, pets } = req.body;
     await database.criarUsuario({
       username: username,
       email: email,
       password: password,
-      avatar: avatar,
-      musicas: musicas,
+      pets: pets
     });
     return res.status(201).send();
   }
