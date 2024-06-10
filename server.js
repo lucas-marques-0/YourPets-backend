@@ -16,10 +16,8 @@ app.use(express.json());
 const authenticateToken = (req, res, next) => {
   const { token } = req.body;
   if (!token) return res.status(401).json({ message: 'Não achou o token.' })
-
   const verifyToken = jwt.verify(token, 'segredo-do-jwt');
   if (!verifyToken) return res.status(404).json({ message: 'Token inválido.' })
-
   next();
 }
 
@@ -51,18 +49,9 @@ app.post('/usuarios', async (req, res) => {
   }
 });
 
-app.get('/usuarios', async (req, res) => {
-  const users = await database.buscarUsuarios();
-  const userObjects = users.map((user) => {
-    const { password, ...userObject } = user;
-    return userObject;
-  });
-  return res.json(userObjects);
-});
-
 app.post('/usuarios/:id', authenticateToken, async (req, res) => {
   const userID = req.params.id;
-  const userInfos = await database.buscarUsuarioID(userID);
+  const userInfos = await database.getUser(userID);
   const userObject = { ...userInfos[0], password: undefined };
   return res.status(201).json(userObject);
 });

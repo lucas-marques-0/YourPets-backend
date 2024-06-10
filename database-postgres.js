@@ -8,14 +8,8 @@ export class DatabasePostgres {
         await sql `insert into usuarios (id, username, email, password, pets) VALUES (${usuarioId}, ${username}, ${email}, ${password}, ${pets})`
     }
 
-    async buscarUsuarios() {
-        let usuarios = await sql `select * from usuarios`
-        return usuarios
-    }
-
-    async buscarUsuarioID(userID) {
-        let infosUsuarios = await sql `select * from usuarios where id = ${userID}`
-        return infosUsuarios
+    async getUser(userID) {
+        return await sql `select * from usuarios where id = ${userID}`
     }
 
     async updateUserPets(id, pets) {
