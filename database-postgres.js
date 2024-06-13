@@ -2,7 +2,7 @@ import { randomUUID } from "crypto";
 import { sql } from "./db.js";
 
 export class DatabasePostgres {
-  async criarUsuario(usuario) {
+  async createUser(usuario) {
     const usuarioId = randomUUID();
     const { username, email, password, pets } = usuario;
     await sql`insert into usuarios (id, username, email, password, pets) VALUES (${usuarioId}, ${username}, ${email}, ${password}, ${pets})`;
@@ -12,7 +12,7 @@ export class DatabasePostgres {
     return await sql`select * from usuarios`;
   }
 
-  async getUser(userID) {
+  async getUserId(userID) {
     return await sql`select * from usuarios where id = ${userID}`;
   }
 

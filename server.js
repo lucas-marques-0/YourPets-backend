@@ -27,7 +27,7 @@ app.post("/usuarios", async (req, res) => {
   const { action } = req.body;
   if (action === "cadastro") {
     const { username, email, password, pets } = req.body;
-    await database.criarUsuario({
+    await database.createUser({
       username: username,
       email: email,
       password: password,
@@ -37,7 +37,7 @@ app.post("/usuarios", async (req, res) => {
   }
   if (action === "login") {
     const { userID, password } = req.body;
-    const userInfo = await database.buscarUsuarioID(userID);
+    const userInfo = await database.getUserId(userID);
     const userPassword = userInfo[0].password;
     if (userPassword === password) {
       const token = jwt.sign(
@@ -66,7 +66,7 @@ app.get("/usuarios", async (req, res) => {
 
 app.post("/usuarios/:id", authenticateToken, async (req, res) => {
   const userID = req.params.id;
-  const userInfos = await database.getUser(userID);
+  const userInfos = await database.getUserId(userID);
   const userObject = { ...userInfos[0], password: undefined };
   return res.status(201).json(userObject);
 });
